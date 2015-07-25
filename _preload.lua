@@ -13,3 +13,12 @@
 --
 
 	api.addAllowed("debugger", { "VisualGDB" })
+
+
+--
+-- Decide when the full module should be loaded.
+--
+
+	return function(cfg)
+		return (cfg.debugger == "VisualGDB")
+	end
