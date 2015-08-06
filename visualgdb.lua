@@ -17,8 +17,6 @@
 	local config = p.config
 
 
-	include("_preload.lua")
-
 --
 -- Add VisualGDB support for vs201x.
 --
@@ -102,7 +100,7 @@
 						end
 						if cfg.system == premake.NACL then
 							-- we need to manually connect
-							_x(4, "<string>interpreter-exec mi \"target remote %s:%s\"</string>", cfg.debugremotehost or "localhost", (""..cfg.debugport) or "4014")
+							_x(4, "<string>interpreter-exec mi \"target remote %s:%s\"</string>", cfg.debugremotehost or "localhost", ("" .. (cfg.debugport or "4014")))
 
 							-- and now we'll execute the post-connect commands here
 							for _, command in ipairs(cfg.debugconnectcommands) do
@@ -205,7 +203,7 @@
 				-- for tcp connections...
 				_p(2, "<Connection xsi:type=\"com.sysprogs.terminal.connection.tcp\">")
 					_x(3, "<Host>%s</Host>", cfg.debugremotehost or "localhost")
-					_p(3, "<Port>%s</Port>", (""..cfg.debugport) or "2159")
+					_p(3, "<Port>%s</Port>", ("" .. (cfg.debugport or "2159")))
 				_p(2, "</Connection>")
 
 				_p(2, "<EchoTypedCharacters>false</EchoTypedCharacters>")
